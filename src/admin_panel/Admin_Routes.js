@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Navigate } from "react-router";
-import { Home } from "../Client-Frontend/Home";
 import { Dashboard } from "./Pages/Dashboard";
 import { ManageMenu } from "./Pages/ManageMenu";
 import { SideBar } from "./Sidebar";
@@ -31,7 +30,7 @@ export const Admin_Routes = ({
         <>
           <Routes>
             <Route path="admin" element={<Dashboard />} />
-            <Route path="admin/managemenu" element={<ConfirmProvider><ManageMenu /> </ConfirmProvider>} />
+            <Route path="users" element={<ConfirmProvider><ManageMenu /> </ConfirmProvider>} />
             <Route path="adduser" element={<AddUser /> }  />
             <Route path="*" element={<Navigate replace to="/admin" />} />
           </Routes>

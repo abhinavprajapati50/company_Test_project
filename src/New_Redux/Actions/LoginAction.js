@@ -21,6 +21,7 @@ console.log(email, password);
             isLoggedIN: true,
             payload: result.data.token
           });
+        
         // }
       } catch (error) {
         return dispatch({

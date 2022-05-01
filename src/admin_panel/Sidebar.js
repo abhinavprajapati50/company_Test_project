@@ -6,7 +6,6 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -98,17 +97,8 @@ export const SideBar = ({ setIsLoggedIn, setAdmin }) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const logOutHandler = () => {
-    setIsLoggedIn(localStorage.removeItem("token", 0));
-    navigate("/", { return: true });
-    // return;
-    // window.location.reload();
-  };
 
-  const homeCompHandler = () => {
-    return navigate("/", { return: true });
-  };
-
+ 
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar position="static">
@@ -122,7 +112,7 @@ export const SideBar = ({ setIsLoggedIn, setAdmin }) => {
           ></IconButton>
           <div
             onClick={() => {
-              setAdmin(false);
+              // setAdmin(false);
               navigate("/", { return: true });
             }}
           >
@@ -132,24 +122,12 @@ export const SideBar = ({ setIsLoggedIn, setAdmin }) => {
               style={{ width: "12%", borderRadius: "60%", height: "30%" }}
             />
           </div>
-          {/* <NavLink to="/">
-            <Button
-              color="inherit"
-              style={{ backgroundColor: "white", color: "black" }}
-              // onClick={() => navigate("/", { return: true })}
-              onClick={() => {
-                setAdmin(false);
-                navigate("/", { return: true });
-              }}
-            >
-              Home
-            </Button>
-          </NavLink> */}
+          
           <Button
             color="inherit"
             // onClick={logOutHandler}
             onClick={() => {
-              setAdmin(false)
+              // setAdmin(false)
               localStorage.removeItem("token")
               setIsLoggedIn(false);
               navigate("/login", { return: true });
@@ -189,7 +167,7 @@ export const SideBar = ({ setIsLoggedIn, setAdmin }) => {
           <List>
           
           <ListItem button>
-            <NavLink to="admin/managemenu" style={{ textDecoration: "none" }}>
+              <NavLink to="users" style={{ textDecoration: "none" }}>
               <ListItemIcon>
                 <InboxIcon />
                 <ListItemText primary={"Add User"} />

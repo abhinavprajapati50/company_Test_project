@@ -24,7 +24,6 @@ import ModalUnstyled from "@mui/base/ModalUnstyled";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import { ConfirmProvider } from "material-ui-confirm";
 import { useConfirm } from "material-ui-confirm";
 import { NavLink } from "react-router-dom";
 
@@ -65,19 +64,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const MenuModelStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 470,
-  height: 500,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  overflowY: "auto",
-  p: 1,
-  boxShadow: 24,
-};
+
 const UpdateMenuModelStyle = {
   position: "absolute",
   top: "50%",
@@ -130,7 +117,6 @@ export const ManageMenu = ({ setadminPanel }) => {
   const [title, setTitle] = useState("");
   const [parent_Menu, setparent_Menu] = useState(0);
   const [update, setupdate] = useState(false);
-  const [chr_delete, setchr_delete] = useState(0);
   const [updatedItemModal, setupdatedItemModal] = useState(false);
   const [updateState, setupdateState] = useState("");
 
@@ -140,7 +126,6 @@ export const ManageMenu = ({ setadminPanel }) => {
   const confirm = useConfirm();
 
 
-  const handleClose = () => setOpen(false);
 
   const openUpdateModalHandler = () => {
     setOpen(false);
@@ -152,19 +137,20 @@ export const ManageMenu = ({ setadminPanel }) => {
     setupdatedItemModal(false);
   };
 
-  useEffect(async () => {
-    let allMenu = await axios
-      // .get("http://localhost:5000/admin/allmenu")
-      .get("https://reqres.in/api/users?page=2");
-    // .get("https://reqres.in/api/login");
-    // .get("http://localhost:5000/admin/allmenu");
+  const getTheUsersFunction = async () => {
+    let allMenu = await axios.get("https://reqres.in/api/users?page=2");
     console.log(allMenu.data.data);
     setdata(allMenu.data.data);
 
     return allMenu;
-    // .then((result) => setdata(result.data.allData))
-    // .catch((errror) => console.log(errror));
-  }, [title, chr_delete]);
+  }
+
+
+
+  useEffect(() => {
+    getTheUsersFunction()
+  }, [])
+
 
   const deleteHandler = async (id) => {
     confirm({ description: `This will permanently delete .` })
@@ -174,7 +160,6 @@ export const ManageMenu = ({ setadminPanel }) => {
       const result = await axios.put(
         `http://localhost:5000/admin/allmenu/delete/${deleteddata.id}`
       );
-      setchr_delete(1);
       console.log(result);
       return result.data;
     } catch (error) {
@@ -191,7 +176,8 @@ export const ManageMenu = ({ setadminPanel }) => {
     }
     try {
       const result = await axios.post(
-        "http://localhost:5000/admin/managemenu",
+        "http://localhost:5000/users",
+        // "http://localhost:5000/admin/managemenu",
         {
           title: title,
           parent_Menu: parent_Menu,

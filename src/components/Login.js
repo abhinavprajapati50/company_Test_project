@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -9,10 +9,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
 import { LoginAction } from "../../src/New_Redux/Actions/LoginAction"
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
+import { Dashboard } from "../admin_panel/Pages/Dashboard";
 
 // Project / Task - Management / frontend / taskmanager - main / src / New_Redux / Actions / LoginAction";
 // import { LoginAction } from "../../../../../../Project/Task-Management/frontend/taskmanager-main/src/New_Redux/Actions/LoginAction";
@@ -21,8 +20,8 @@ const emailValidator =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2}))$/;
 
 // /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
-const passwordValidator =
-  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+// const passwordValidator =
+//   /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 
 function Copyright(props) {
   return (
@@ -43,7 +42,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export const Login = ({ setIsLoggedIn }) => {
+export const Login = ({ isLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -66,51 +65,14 @@ export const Login = ({ setIsLoggedIn }) => {
     }
   };
 
-  console.log(emailValidator.test(email));
-  // console.log("false email", email.toLowerCase().match(emailValidator));
-  // console.log(
-  //   "false password",
-  //   password.toLowerCase().match(passwordValidator)
-  // );
+ 
 
   const onChangeHanlder1 = (e) => {
     setPassword(e.target.value);
 
-    // if (password.toLowerCase().match(passwordValidator)) {
-    //   setPassError(false);
-    // } else {
-    //   setPassError(true);
-    // }
-    // validator();
+   
   };
 
-  // const loggedINHandler = async (event) => {
-  //   event.preventDefault();
-  //   debugger
-  //   try {
-  //     const result = await axios.post('https://reqres.in/api/login', {
-  //       email, password
-  //     });
-  //     // const result = await axios.post("http://localhost:5000/signin", {
-  //     //   email: email,
-  //     //   password: password,
-  //     // });
-  //     console.log(result.data.token);
-  //     // toast.success(result.data.message);
-
-  //     console.log("the result", result);
-  //     localStorage.setItem('token' , result.data.token);
-  //     // setEmailError(false);
-  //     setIsLoggedIn(true);
-  //     navigate("admin", { return: true });
-  //   } catch (error) {
-  //     // setEmailError(true);
-  //     console.log(error.message);
-  //     return toast.error("Invalid Credentials");
-
-  //     // console.log(error);
-  //   }
-  // };
 
   const loggedINHandler = async (event) => {
     event.preventDefault();
@@ -118,7 +80,7 @@ export const Login = ({ setIsLoggedIn }) => {
     setEmailError(true);
     setPassError(true);
 
-    // validation();
+    validation();
     const loginCredentials = {
       email,
       password
@@ -126,21 +88,24 @@ export const Login = ({ setIsLoggedIn }) => {
     const loggedInData = await dispatch(LoginAction(loginCredentials));
 
     console.log(loggedInData);
-    // setloginData(loggedInData)
 
-    if (loggedInData.isLoggedIn == false) {
-      toast.error(loggedInData.payload);
-      return;
-    }
-    // setisLoggedIN(true);
+    // if (loggedInData.isLoggedIn === false) {
+    //   toast.error(loggedInData.payload);
+    //   return;
+    // }
 
     console.log("--------------loggedInData.payload", loggedInData.payload);
     // clearData();
-    // navigate("/admin");
-    toast.success(`Welcome ${loggedInData.payload.username} `);
+     navigate("/admin", { return: true });
+    //  navigate("/admin");
+    // toast.success(`Welcome ${loggedInData.payload.username} `);
     // toast.success(result.data.message);
-    navigate("/admin", { return: true });
   };
+
+  useEffect(() => {
+    <Dashboard />
+  }, [isLoggedIn])
+
 
   return (
     <>
