@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -11,7 +11,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { LoginAction } from "../../src/New_Redux/Actions/LoginAction"
 import {  useDispatch } from "react-redux";
-import { Dashboard } from "../admin_panel/Pages/Dashboard";
 
 // Project / Task - Management / frontend / taskmanager - main / src / New_Redux / Actions / LoginAction";
 // import { LoginAction } from "../../../../../../Project/Task-Management/frontend/taskmanager-main/src/New_Redux/Actions/LoginAction";
@@ -89,10 +88,10 @@ export const Login = ({ isLoggedIn }) => {
 
     console.log(loggedInData);
 
-    // if (loggedInData.isLoggedIn === false) {
-    //   toast.error(loggedInData.payload);
-    //   return;
-    // }
+    if (loggedInData.isLoggedIn === false) {
+      // toast.error(loggedInData.payload);
+      return;
+    }
 
     console.log("--------------loggedInData.payload", loggedInData.payload);
     // clearData();
@@ -101,10 +100,6 @@ export const Login = ({ isLoggedIn }) => {
     // toast.success(`Welcome ${loggedInData.payload.username} `);
     // toast.success(result.data.message);
   };
-
-  useEffect(() => {
-    <Dashboard />
-  }, [isLoggedIn])
 
 
   return (
@@ -144,7 +139,7 @@ export const Login = ({ isLoggedIn }) => {
             // onChange={(e) => setEmail(e.target.value)}
             />
             {/* {!emailValidator.test(email) ? <p> {error}</p> : ""} */}
-            {emailError && !email && <p style={{ color: "red" }}>invalid Email</p>}
+            {emailError && !email && <p style={{ color: "red" }}>plz fill the email</p>}
             {validEmail ? <span> Plz fill Valid Message</span> : ""}
 
             <TextField

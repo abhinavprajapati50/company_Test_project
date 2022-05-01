@@ -100,9 +100,9 @@ export const SideBar = ({ setIsLoggedIn, setAdmin }) => {
 
  
   return (
-    <Box sx={{ display: "flex" }}>
-      <AppBar position="static">
-        <Toolbar>
+    <Box sx={{ display: "flex" }}  >
+      <AppBar position="static" >
+        <Toolbar >
           <IconButton
             size="large"
             edge="start"
@@ -144,8 +144,8 @@ export const SideBar = ({ setIsLoggedIn, setAdmin }) => {
       </AppBar>
       <CssBaseline />
 
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
+      <Drawer variant="permanent" open={open}  >
+        <DrawerHeader >
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
@@ -155,9 +155,9 @@ export const SideBar = ({ setIsLoggedIn, setAdmin }) => {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
+        <List >
           <ListItem button>
-            <NavLink to="/admin" style={{ textDecoration: "none" }}>
+            <NavLink to="/admins" style={{ textDecoration: "none" }}>
               <ListItemIcon>
                 <InboxIcon />
                 <ListItemText primary={"Dashboard"} />
