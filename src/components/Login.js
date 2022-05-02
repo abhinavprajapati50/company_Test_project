@@ -41,7 +41,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export const Login = ({ isLoggedIn }) => {
+export const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -95,7 +95,8 @@ export const Login = ({ isLoggedIn }) => {
 
     console.log("--------------loggedInData.payload", loggedInData.payload);
     // clearData();
-     navigate("/admin", { return: true });
+    setIsLoggedIn(true)
+     navigate("/admins", { return: true });
     //  navigate("/admin");
     // toast.success(`Welcome ${loggedInData.payload.username} `);
     // toast.success(result.data.message);

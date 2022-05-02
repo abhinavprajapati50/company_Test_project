@@ -18,7 +18,7 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 
-const drawerWidth = 340;
+const drawerWidth = 0;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,

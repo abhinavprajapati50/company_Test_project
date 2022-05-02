@@ -26,12 +26,12 @@ export const Admin_Routes = ({
           <SideBar setIsLoggedIn={setIsLoggedIn} />
         )} */}
 
-          <SideBar setIsLoggedIn={setIsLoggedIn} setAdmin={setadmin} />
+        <SideBar setIsLoggedIn={setIsLoggedIn} setAdmin={setadmin} />
         <>
           <Routes>
             <Route path="admin" element={<Dashboard />} />
             <Route path="users" element={<ConfirmProvider><ManageMenu /> </ConfirmProvider>} />
-            <Route path="adduser" element={<AddUser /> }  />
+            <Route path="adduser" element={<AddUser />} />
             <Route path="*" element={<Navigate replace to="/admin" />} />
           </Routes>
         </>

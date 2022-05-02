@@ -24,15 +24,13 @@ function App() {
 
 
           <SideBar setIsLoggedIn={setIsLoggedIn} />
-          <>
-          {console.log("++++++++++++++++++logged in", isLoggedIn)}
+          
             <Routes>
               <Route path="admins" element={<Dashboard />} />
               <Route path="users" element={<ConfirmProvider><ManageMenu /> </ConfirmProvider>} />
               <Route path="adduser" element={<AddUser />} />
               <Route path="*" element={<Navigate replace to="admins" />} />
             </Routes>
-          </>
         </>
       )}
 
@@ -51,7 +49,7 @@ function App() {
                 element={<Home isLoggedIn={isLoggedIn} />}
               />
               <Route path="*" element={<Navigate replace to="/login" />} /> */}
-            {/* <Route path="*" element={<Navigate replace to="/login" />} /> */}
+            <Route path="*" element={<Navigate replace to="login" />} />
           </Routes>
         </>
       )}
