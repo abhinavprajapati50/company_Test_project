@@ -57,8 +57,7 @@ export const AddUser = (event) => {
     const [isUpdated, setisUpdated] = useState(false)
 
     const [update, setUpdate] = useState()
-    // console.log(isUpdated ? JSON.stringify( update.name) : '');
-    const [name, setName] = useState(isUpdated ? JSON.stringify(update.name) : '')
+    const [name, setName] = useState(isUpdated ? update.name : '')
     const [job, setJob] = useState(isUpdated ? update.job : '')
     const [data, setData] = useState([])
     const { id } = useParams()
@@ -71,7 +70,6 @@ export const AddUser = (event) => {
         setJob("")
     }
 
-    console.log("-----updateupdate------>>>", isUpdated);
 
     const adduserHandler = async (event) => {
         event.preventDefault();
@@ -86,7 +84,6 @@ export const AddUser = (event) => {
         //     name, job, id: update.id
         // }
 
-        console.log("------updateupdate--------", isUpdated);
 
         if (isUpdated) {
             setisUpdated(true)
@@ -94,16 +91,9 @@ export const AddUser = (event) => {
             console.log(upadtedData);
             const updatedData = upadtedData.payload
             console.log("--------updatedData", updatedData);
-            // setData(data.map(cur => {
-            //     return console.log(cur);
-            //     // if (cur.id === update?.id) {
-            //     //       return  console.log("*********",cur);
-            //     // }
-            // }
-            // ))
+
             console.log(data);
             const updatedItem = data.map(cur => {
-                //    return cur.id == update.id ? {...cur, name:name, job:job} : ""
                 if (cur.id == update.id) {
                     console.log({ ...cur, name, job });
                     return { ...cur, name, job }
@@ -124,11 +114,6 @@ export const AddUser = (event) => {
 
             clearData()
         }
-
-        // const updateData = await dispatch(userUpdateSuccess(updateCredentials));
-        // console.log(updateData);
-
-
     }
 
     const editHandler = (id) => {
@@ -151,12 +136,8 @@ export const AddUser = (event) => {
 
     console.log(data);
     return (
-        <div> {isUpdated ? <div> Add ddUser</div> : <div>  Update User </div>}
-                { console.log("---------------------------------------------",isUpdated) }
+        <div>
             <Box
-                sx={{
-                    // margin: 108,
-                }}
                 onSubmit={adduserHandler}
                 style={{ width: "20%", marginLeft: '34rem' }}
                 noValidate
@@ -164,7 +145,7 @@ export const AddUser = (event) => {
 
             >
                 <Typography component="h1" variant="h5">
-                {isUpdated ?  <div>  Update User </div> : <div> Add User</div> }
+                    {isUpdated ? <div>  Update User </div> : <div> Add User</div>}
                 </Typography>
 
                 <TextField
